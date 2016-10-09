@@ -1,0 +1,23 @@
+{
+  "name": "castle-war",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Szalymon/CastleWar.git"
+  },
+  "author": "Simon Urbanovics",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Szalymon/CastleWar/issues"
+  },
+  "homepage": "https://github.com/Szalymon/CastleWar#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.5.0"
+  }
+}

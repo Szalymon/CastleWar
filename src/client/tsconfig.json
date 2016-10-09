@@ -1,0 +1,11 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es5",
+        "module": "amd",
+        "watch": true,
+        "sourceMap": true,
+        //"outFile": "../../dist/public/client.js"
+        "outDir": "../../dist/public/"
+    }
+}
