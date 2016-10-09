@@ -38,11 +38,9 @@ socket.on("disconnect", function() {
 //-----------------------------------------
 // Initialize phaser
 //-----------------------------------------
+/*
 game = new Presenter.Presenter();
 game.state.add("INGAME", Presenter.Match, false);
 game.gameManager = clientGameManager;
 game.state.start("INGAME");
-
-(function retek() {
-	console.log("Retek running");
-})();
+*/
