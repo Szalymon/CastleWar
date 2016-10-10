@@ -22,6 +22,7 @@ export class ServerGameManager extends Manager.GameManager implements Manager.Co
 	
 	constructor() {
 		super();
+		console.log("Server has been created");
 		this.elapsedTime = Number.MIN_VALUE;
 		this.observers = new Array();
 		this.ownedId = ServerGameManager.getNextId();

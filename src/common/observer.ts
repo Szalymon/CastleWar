@@ -4,7 +4,7 @@
 
 import Model = require("../common/model");
 
-export interface Observer {
+interface Observer {
 	//loadPlayers(player:Model.Player[]);
 	loadCastles(castles:Model.CastleDictionary);
 	loadUnitLines(unitLines:Model.UnitLineDictionary);
@@ -25,3 +25,5 @@ export interface Observer {
 			- ?Szinkronizáció
 	*/
 }
+
+export default Observer;
