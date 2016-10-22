@@ -1,8 +1,8 @@
-import Vector from "Vector";
-import Player from "Player";
-import Tickable from "Tickable";
-import SynchronUtility from "SynchronUtility";
-import Unit from "Unit";
+import Vector from "./Vector";
+import Player from "./Player";
+import Tickable from "./Tickable";
+import SynchronUtility from "./SynchronUtility";
+import Unit from "./Unit";
 
 class UnitLine implements Tickable {
 	id: number;

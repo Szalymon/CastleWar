@@ -1,12 +1,7 @@
-namespace Hash {
-
-    export interface String<ValueType> {
-        [index: string]: ValueType;
-    }
-
-    export interface Number<ValueType> {
-        [index: number]: ValueType;
-    }
+export interface StringHash<ValueType> {
+    [index: string]: ValueType;
 }
 
-export default Hash;
+export interface NumberHash<ValueType> {
+    [index: number]: ValueType;
+}

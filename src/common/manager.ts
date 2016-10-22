@@ -1,16 +1,21 @@
 /**
- * Controllerek őse, ami közös a kliens és a szerver model kezelésében az itt található
+ * Controllerek őse, ami közös a kliens és a szerver kezelésében az itt található
  */
+import Vector from "./Vector";
+import Player from "./Player";
+import Castle from "./Castle";
+import UnitLine from "./UnitLine";
+import Observer from "./Observer";
 
-import Model = require("../common/model");
-import Observer = require("../common/observer");
+import {StringHash, NumberHash} from "./Hash";
+
 import Controller = require("../common/controller");
 
 // Lelket add a játéknak, eltelt idő, események kezelése, heartbeat
 export class GameManager {
-	protected castles: Model.CastleDictionary = {};
-	protected unitLines: Model.UnitLineDictionary = {};
-	protected players: PlayerDictionary = {};
+	protected castles: NumberHash<Castle> = {};
+	protected unitLines: StringHash<UnitLine> = {};
+	protected players: StringHash<Player> = {};
 	protected playersNumber: number;
 	protected elapsedTime : number;
 
@@ -29,20 +34,20 @@ export class GameManager {
 		return this.playersNumber;
 	}
 
-	public addPlayer(newPlayer: Model.Player) {
+	public addPlayer(newPlayer: Player) {
 		this.players[newPlayer.name] = newPlayer;
 		this.playersNumber++;
 	}
 
-	public addCastle(newCastle: Model.Castle) {
+	public addCastle(newCastle: Castle) {
 		this.castles[newCastle.id] = newCastle;
 	}
 
-	public getCastles(): Model.CastleDictionary {
+	public getCastles(): NumberHash<Castle> {
 		return this.castles;
 	}
 
-	public getUnitLines(): Model.UnitLineDictionary {
+	public getUnitLines(): StringHash<UnitLine> {
 		return this.unitLines;
 	}
 	
@@ -86,7 +91,7 @@ export class GameManager {
 		}
 	}
 
-	public getUnitLineFromTo(from: Model.Castle, toId: number): Model.UnitLine {
+	public getUnitLineFromTo(from: Castle, toId: number): UnitLine {
         if (from.id != toId) {
             for (var index = 0; index < from.unitLineIds.length; index++) {
                 var unitLineId = from.unitLineIds[index];
@@ -107,7 +112,7 @@ export class GameManager {
 		for (var unitLineId in this.unitLines) {
 
 			var unitLine = this.unitLines[unitLineId];
-			var targetCastle: Model.Castle = this.castles[unitLine.castleIdTo];
+			var targetCastle: Castle = this.castles[unitLine.castleIdTo];
 			//			var oppositLine = targetCastle.getUnitLineTo(unitLine.castleIdFrom);
 			var oppositLine = this.getUnitLineFromTo(targetCastle, unitLine.castleIdFrom);
 			
@@ -150,7 +155,7 @@ export class GameManager {
 			if(!unitLine.isCutted) {
 				var cuttingIndex = cut["cuttingIndex"];
 				console.log("Lefut");
-				var newUnitLine = new Model.UnitLine(unitLine.owner, unitLine.castleIdFrom, unitLine.castleIdTo, unitLine.startPoint.clone(), unitLine.direction.multiply(4));
+				var newUnitLine = new UnitLine(unitLine.owner, unitLine.castleIdFrom, unitLine.castleIdTo, unitLine.startPoint.clone(), unitLine.direction.multiply(4));
 				this.unitLines[newUnitLine.id] = newUnitLine;
 
 				newUnitLine.isCutted = true;
@@ -183,13 +188,9 @@ export class GameManager {
 // Interfaces
 //-----------------------------------------
 
-interface PlayerDictionary {
-	[index: string]: Model.Player;
-}
-
 export interface Observerable {
-	observers: Observer.Observer[];
-	registerObserver(ob: Observer.Observer);
+	observers: Observer[];
+	registerObserver(ob: Observer);
 	requestSynchronization();
 	notifyObservers(unitRemoved: number[]);
 	/*
@@ -211,7 +212,7 @@ export interface Controllable {
 	
 	//------Validation needed---------
 	// Lehetne game id-val és akkor kastély kastély player
-	sendUnits(player: Model.Player, from: number, to: number);
-	cutLines(player: Model.Player, dict: Model.VectorDictionary);
-	ready(player: Model.Player);
+	sendUnits(player: Player, from: number, to: number);
+	cutLines(player: Player, dict: NumberHash<Vector>);
+	ready(player: Player);
 }

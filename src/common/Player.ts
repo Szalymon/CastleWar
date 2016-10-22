@@ -1,4 +1,4 @@
-import SynchronUtility from "SynchronUtility";
+import SynchronUtility from "./SynchronUtility";
 
 class Player {
     id: number;

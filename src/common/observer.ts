@@ -2,12 +2,13 @@
  * Controllerek őse, ami közös a kliens és a szerver model kezelésében az itt található
  */
 
-import Model = require("../common/model");
+import {StringHash, NumberHash} from "./Hash";
+import Castle from "./Castle";
+import UnitLine from "./UnitLine";
 
 interface Observer {
-	//loadPlayers(player:Model.Player[]);
-	loadCastles(castles:Model.CastleDictionary);
-	loadUnitLines(unitLines:Model.UnitLineDictionary);
+	loadCastles(castles:NumberHash<Castle>);
+	loadUnitLines(unitLines:StringHash<UnitLine>);
 	
 	unitRemoved(unitIds : number[]);
 	
